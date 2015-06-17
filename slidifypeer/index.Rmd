@@ -1,0 +1,44 @@
+---
+title       : Fuel consumption prediction 
+subtitle    : predict mpg by four predictors(cyl disp hp wt am)
+author      : Sheila
+job         : Information Science
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Data source
+
+```{r data}
+data(mtcars)
+head(mtcars)
+```
+
+
+---
+
+## linear regression
+```{r lmfit}
+lmfit <- lm(mpg ~ cyl+disp+hp+wt+am, data=mtcars)
+summary(lmfit)
+```
+
+---
+
+## Prediction
+```{r pred}
+test <- data.frame(cyl=4,disp=120,hp=110,wt=2.50,am=1)
+predict(lmfit, newdata=test)
+```
+
+---
+
+## diagnostic plot
+```{r plot}
+par(mfrow = c(2, 2))
+plot(lmfit)
+```
